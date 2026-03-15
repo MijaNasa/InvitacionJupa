@@ -36,7 +36,7 @@ const toggleMusic = () => {
 
     <!-- Footer decoration -->
     <footer class="py-12 flex justify-center opacity-30">
-        <img src="/wedding_decorative_flowers_blue_1773595204314.png" class="w-32 h-auto" />
+        <img src="/wedding_arch.png" class="w-24 h-auto" />
     </footer>
   </div>
 </template>
