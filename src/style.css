@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --color-wedding-blue: #1e3a8a;
+  --color-wedding-celeste: #e0f2fe;
+  --color-wedding-accent: #7dd3fc;
+  --font-elegant: "Great Vibes", cursive;
+  --font-body: "Montserrat", sans-serif;
+  --font-display: "Playfair Display", serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-body);
+  }
+
+  body {
+    background-color: var(--color-wedding-celeste);
+    color: #1e293b;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    color: var(--color-wedding-blue);
+  }
+}
+
+@layer components {
+  .btn-wedding {
+    @apply bg-wedding-blue text-white font-body px-8 py-3 rounded-full uppercase tracking-widest transition-all duration-300 hover:bg-[#3a4a6e] hover:shadow-lg active:scale-95;
+  }
+  
+  .section-container {
+    @apply max-w-lg mx-auto px-6 py-16 text-center;
+  }
+  
+  .script-text {
+    @apply font-elegant text-5xl md:text-6xl text-wedding-blue;
+  }
+}
