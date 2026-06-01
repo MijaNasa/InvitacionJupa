@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import EnvelopeSection from './components/EnvelopeSection.vue';
 import HeroSection from './components/HeroSection.vue';
 import CeremonySection from './components/CeremonySection.vue';
 import GallerySection from './components/GallerySection.vue';
@@ -20,8 +21,12 @@ const toggleMusic = () => {
     <AudioPlayer :isPlaying="isMusicPlaying" @toggle="toggleMusic" />
 
     <main>
-      <!-- Hero Section -->
-      <HeroSection :isMusicPlaying="isMusicPlaying" @toggleMusic="toggleMusic" />
+      <!-- Envelope Animation (intro) -->
+      <EnvelopeSection />
+
+      <!-- Main content — scroll target from envelope -->
+      <div id="main-content">
+        <HeroSection :isMusicPlaying="isMusicPlaying" @toggleMusic="toggleMusic" />
       
       <!-- Ceremony & Party Section -->
       <CeremonySection />
@@ -31,6 +36,7 @@ const toggleMusic = () => {
       
       <!-- RSVP & Dress Code -->
       <RSVPSection />
+      </div>
 
     </main>
 
