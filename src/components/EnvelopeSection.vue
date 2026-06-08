@@ -4,11 +4,14 @@ import { ref } from 'vue'
 const state = ref('idle') // idle → opening → done
 const flipped = ref(false)
 
+const FLAP_MS  = 1800
+const PAUSE_MS = 250
+const CARD_MS  = 2800
+
 function startAnimation() {
   if (state.value !== 'idle') return
   state.value = 'opening'
-  // flap abre (~600ms), luego carta sube (2200ms)
-  setTimeout(() => { state.value = 'done' }, 600 + 2200)
+  setTimeout(() => { state.value = 'done' }, FLAP_MS + PAUSE_MS + CARD_MS)
 }
 
 function flipCard() {
@@ -117,12 +120,12 @@ function scrollDown() {
 
 /* ── VARIABLES ── */
 :root {
-  --env-blue: #a8bccc;
-  --env-dark: #8fa5b8;
-  --env-lite: #c4d3df;
+  --env-blue: #f0ebe1;
+  --env-dark: #ddd5c4;
+  --env-lite: #f8f4ee;
   --gold:     #c9a96e;
   --text:     #5a3e2b;
-  --shadow:   rgba(80, 60, 40, 0.18);
+  --shadow:   rgba(80, 60, 40, 0.22);
 }
 
 /* ── SCENE ── */
@@ -170,12 +173,12 @@ function scrollDown() {
   pointer-events: none;
 }
 .seam-top {
-  stroke: rgba(0,0,0,0.12);
-  stroke-width: 1;
+  stroke: rgba(0,0,0,0.08);
+  stroke-width: 0.8;
 }
 .seam-bot {
-  stroke: rgba(255,255,255,0.35);
-  stroke-width: 1;
+  stroke: rgba(255,255,255,0.6);
+  stroke-width: 0.8;
 }
 
 .env-fold-left,
@@ -189,7 +192,7 @@ function scrollDown() {
 
 .env-liner {
   position: absolute; inset: 0;
-  background: linear-gradient(160deg, #d4c47a 0%, #f0e5b0 45%, #b89a50 100%);
+  background: linear-gradient(170deg, #c8ba60 0%, #ede090 40%, #f5eea8 65%, #d4c468 100%);
   clip-path: polygon(0 0, 100% 0, 50% 52%);
   opacity: 0;
   transition: opacity 0.5s ease 0.2s;
@@ -198,17 +201,15 @@ function scrollDown() {
 
 .env-flap {
   position: absolute; inset: 0;
-  background: var(--env-blue);
+  background: linear-gradient(180deg, #f8f5ee 0%, #ede8de 100%);
   clip-path: polygon(0 0, 100% 0, 50% 52%);
   transform-origin: top center;
-  transform: perspective(800px) rotateX(0deg);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  filter: brightness(1.04);
+  transform: perspective(1000px) rotateX(0deg);
+  filter: brightness(1.0);
   z-index: 10;
 }
 .env-flap.is-open {
-  animation: flap-open 0.85s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: flap-open 1.8s cubic-bezier(0.45, 0, 0.35, 1) forwards;
 }
 
 .env-names {
@@ -216,7 +217,7 @@ function scrollDown() {
   display: flex; align-items: flex-end; justify-content: space-between;
   padding: 0 10% 18%;
   font-family: 'Playfair Display', serif;
-  font-size: 0.55rem; letter-spacing: .13em; color: #1e4a7a;
+  font-size: 0.55rem; letter-spacing: .13em; color: #c9762e;
   pointer-events: none;
 }
 
@@ -287,7 +288,7 @@ function scrollDown() {
 
 /* ── ESTADOS DE LA CARTA ── */
 .card-wrapper.rising {
-  animation: card-rise 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+  animation: card-rise 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.05s forwards;
 }
 .card-wrapper.risen {
   transform: translateX(-50%) translateY(-60px) scale(1.0);
@@ -342,9 +343,8 @@ function scrollDown() {
 }
 
 @keyframes flap-open {
-  0%   { transform: perspective(800px) rotateX(0deg); }
-  60%  { transform: perspective(800px) rotateX(-195deg); }
-  100% { transform: perspective(800px) rotateX(-180deg); }
+  0%   { transform: perspective(1000px) rotateX(0deg); }
+  100% { transform: perspective(1000px) rotateX(-180deg); }
 }
 
 @keyframes card-rise {

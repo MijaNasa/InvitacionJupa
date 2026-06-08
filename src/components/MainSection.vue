@@ -14,7 +14,7 @@
       <h2 class="title">¡Los esperamos!</h2>
       <p class="subtitle">
         Será un honor compartir este momento<br>
-        tan especial con ustedes.
+        tan especial con ustedes
       </p>
       <div class="gold-rule"></div>
       <p class="times">
@@ -29,7 +29,7 @@
 
       <!-- Dress code -->
       <div class="card">
-        <div class="card-icon">👗</div>
+       
         <h3 class="card-title">Dress code</h3>
         <p class="card-body2">
           Agradecemos asistir con recato
@@ -38,12 +38,12 @@
 
       <!-- Cómo llegar -->
       <div class="card">
-        <div class="card-icon">📍</div>
+       
         <h3 class="card-title">Cómo llegar</h3>
         <p class="card-body">
           Salón Estancia Pizarro<br>
-          <em>Av. Ejército Argentino 47</em><br>
-          La Calera, Córdoba
+          <em>Av Ejército Argentino 47</em><br>
+          La Calera Córdoba
         </p>
         <a
           href="https://maps.google.com/?q=Av.+Ejército+Argentino+47,+La+Calera,+Córdoba"
@@ -59,7 +59,7 @@
     <div class="block rsvp">
       <p class="label">Confirmar asistencia</p>
       <p class="rsvp-note">
-        Por favor confirmá  <strong>tan pronto sea posible</strong>.
+        Por favor confirmá  tan pronto sea posible
       </p>
       <a
         href="https://forms.gle/faiGHecEcRjTK7TX9"
@@ -73,9 +73,11 @@
 
     <!-- Footer -->
     <div class="block footer-msg">
+      <img src="/fotoCamiYMija.jpg" alt="Cami y Mija" class="couple-photo" />
       <div class="gold-rule"></div>
-      
+
       <p class="families">Familia Nasatsky · Familia Eblagon</p>
+      <p class="alias">Alias: XXXXX</p>
     </div>
 
   </section>
@@ -89,7 +91,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Atteron', 'Montserrat', sans-serif;
   color: #5a3e2b;
 }
 
@@ -131,7 +133,7 @@
 }
 
 .title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Atteron', 'Playfair Display', serif;
   font-size: 2rem;
   font-weight: 400;
   color: #3d2b1a;
@@ -193,8 +195,8 @@
   font-size: 1.1rem;
 }
 .card-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 0.9rem;
+  font-family: 'Atteron', 'Playfair Display', serif;
+  font-size: 1.1rem;
   font-weight: 400;
   color: #3d2b1a;
   margin: 0;
@@ -210,7 +212,7 @@
   font-size: 0.72rem;
   line-height: 1.7;
   color: #7a5c42;
-  margin-top: 20px;
+  margin-top: 35px;
 }
 .card-body strong { color: #3d2b1a; }
 .card-body em { font-style: normal; color: #c9a96e; }
@@ -242,7 +244,7 @@
   display: inline-block;
   background: #3d2b1a;
   color: #f5f0e8;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Atteron', 'Montserrat', sans-serif;
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -259,6 +261,17 @@
 /* ── FOOTER MSG ── */
 .footer-msg { padding-top: 1rem; }
 
+.couple-photo {
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 6px 24px rgba(80, 60, 40, 0.14);
+}
+
 .hebrew-footer {
   font-family: 'Playfair Display', serif;
   font-size: 1rem;
@@ -272,5 +285,14 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #a08060;
+  margin-bottom: 0.4rem;
 }
+
+.alias {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: #a08060;
+  margin-top: 0;
+}
+
 </style>

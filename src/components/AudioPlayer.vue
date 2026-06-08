@@ -5,7 +5,7 @@ const props = defineProps(['isPlaying']);
 const emit = defineEmits(['toggle']);
 
 // YouTube video ID from the link: HRdGeSoH3-k
-const videoId = "HRdGeSoH3-k";
+const videoId = "7YLijAtJp9A";
 </script>
 
 <template>
