@@ -5,7 +5,7 @@
   <section class="py-20 px-4">
     <div class="max-w-xl mx-auto text-center space-y-12">
         <!-- Romantic Quote -->
-        <p class="font-elegant text-3xl md:text-5xl leading-relaxed text-[#1e3a8a] px-4 italic">
+        <p class="font-elegant text-3xl md:text-5xl leading-relaxed text-[#a95c2a] px-4 italic">
             " אני לדודי ודודי לי"
         </p>
 
@@ -27,7 +27,7 @@
 
         <!-- Back to Top Button style footer decoration -->
         <div class="pt-8">
-            <button class="w-10 h-10 rounded-full border border-sky-300 flex items-center justify-center text-sky-400 hover:bg-sky-400 hover:text-white transition-colors mx-auto">
+            <button class="w-10 h-10 rounded-full border border-[#b9ccdc] flex items-center justify-center text-[#c5bd63] hover:bg-[#a95c2a] hover:text-white transition-colors mx-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
                 </svg>

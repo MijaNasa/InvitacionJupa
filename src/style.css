@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-wedding-blue: #1e3a8a;
-  --color-wedding-celeste: #e0f2fe;
-  --color-wedding-accent: #7dd3fc;
+  --color-wedding-blue: #a95c2a;
+  --color-wedding-celeste: #b9ccdc;
+  --color-wedding-accent: #c5bd63;
   --font-elegant: "Great Vibes", cursive;
   --font-body: "Montserrat", sans-serif;
   --font-display: "Playfair Display", serif;
@@ -16,8 +16,8 @@
   }
 
   body {
-    background-color: var(--color-wedding-celeste);
-    color: #1e293b;
+    background-color: #f5f0eb;
+    color: #3d2b1f;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -29,7 +29,7 @@
 
 @layer components {
   .btn-wedding {
-    @apply bg-wedding-blue text-white font-body px-8 py-3 rounded-full uppercase tracking-widest transition-all duration-300 hover:bg-[#3a4a6e] hover:shadow-lg active:scale-95;
+    @apply bg-wedding-blue text-white font-body px-8 py-3 rounded-full uppercase tracking-widest transition-all duration-300 hover:bg-[#7a3f1a] hover:shadow-lg active:scale-95;
   }
   
   .section-container {

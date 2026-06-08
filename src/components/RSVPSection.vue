@@ -5,8 +5,8 @@
   <section class="py-20 px-6 bg-white/40">
     <div class="section-container">
         <!-- Dress Code Section -->
-        <div class="bg-sky-100 py-10 px-6 mb-16 rounded-lg shadow-sm">
-            <h3 class="text-2xl font-display uppercase tracking-widest text-[#1e3a8a] mb-6">Dress Code</h3>
+        <div class="bg-[#b9ccdc]/30 py-10 px-6 mb-16 rounded-lg shadow-sm">
+            <h3 class="text-2xl font-display uppercase tracking-widest text-[#a95c2a] mb-6">Dress Code</h3>
             <p class="text-lg font-medium text-wedding-blue/80 italic">Se Ruega favorecer el recato</p>
         </div>
 

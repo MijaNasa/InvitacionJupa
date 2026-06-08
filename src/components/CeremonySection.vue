@@ -5,8 +5,8 @@
   <section class="bg-white/80 py-20 px-6 backdrop-blur-sm border-t border-b border-wedding-accent/20">
     <div class="section-container">
         <!-- Banner Title Section like screenshot -->
-        <div class="bg-[#f0e8d0] py-6 px-4 mb-20 rounded-sm shadow-sm">
-            <h2 class="text-3xl font-display uppercase tracking-widest text-[#5d4037]">¡Llegó el día!</h2>
+        <div class="bg-[#b9ccdc]/25 py-6 px-4 mb-20 rounded-sm shadow-sm">
+            <h2 class="text-3xl font-display uppercase tracking-widest text-[#a95c2a]">¡Llegó el día!</h2>
             <p class="text-wedding-blue/70 mt-2 font-medium">Bienvenidos a nuestra Jupa</p>
         </div>
 
@@ -29,7 +29,7 @@
             <p class="text-lg">17:00 hs</p>
             
             <div class="pt-6 space-y-1">
-                <p class="text-2xl font-display text-[#5d4037]">Salón Estancia Pizarro</p>
+                <p class="text-2xl font-display text-[#a95c2a]">Salón Estancia Pizarro</p>
                 <p class="text-sm italic">Av. Ejército Argentino 47, X5151 La Calera, Córdoba.</p>
             </div>
 
