@@ -1,23 +1,16 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
-const state = ref('idle') // idle → opening → done
-const flipped = ref(false)
+const flipped   = ref(false)
+const visible   = ref(false)
+const showScroll = ref(false)
 
-const FLAP_MS  = 1800
-const PAUSE_MS = 250
-const CARD_MS  = 2800
+onMounted(() => {
+  setTimeout(() => { visible.value = true },   200)
+  setTimeout(() => { showScroll.value = true }, 1600)
+})
 
-function startAnimation() {
-  if (state.value !== 'idle') return
-  state.value = 'opening'
-  setTimeout(() => { state.value = 'done' }, FLAP_MS + PAUSE_MS + CARD_MS)
-}
-
-function flipCard() {
-  if (state.value !== 'done') return
-  flipped.value = !flipped.value
-}
+function flipCard() { flipped.value = !flipped.value }
 
 function scrollDown() {
   document.getElementById('main-content')?.scrollIntoView({ behavior: 'smooth' })
@@ -25,95 +18,47 @@ function scrollDown() {
 </script>
 
 <template>
-  <section class="min-h-screen flex flex-col items-center justify-start relative overflow-hidden px-4 pt-10">
+  <section class="card-section">
 
-    <div class="absolute inset-0" style="background:#ede8df;">
-      <div class="absolute inset-0"
-        style="background-image:url('/hero-bg.png');background-size:cover;background-position:center;opacity:.06"/>
+    <!-- ZONA NARANJA: header -->
+    <div class="header-area">
+      <Transition name="slide-down">
+        <div v-if="visible" class="header">
+          <p class="eh-top">¡Nos casamos!</p>
+          <h1 class="eh-names">Mija <span class="eh-amp">&amp;</span> Cami</h1>
+          <p class="eh-date">16 de Agosto &nbsp;·&nbsp; 3 de Elul</p>
+        </div>
+      </Transition>
     </div>
 
-    <div class="relative z-10 flex flex-col items-center w-full">
+    <!-- ZONA BEIGE: carta + scroll -->
+    <div class="card-area">
 
-      <!-- ESCENA -->
-      <div class="scene">
-
-        <!-- HEADER sobre cerrado — absoluto dentro de la escena -->
-        <Transition name="fade">
-          <div v-if="state === 'idle'" class="envelope-header">
-            <p class="eh-top">¡Nos casamos!</p>
-            <h1 class="eh-names">Mija &nbsp;·&nbsp; Cami</h1>
-            <p class="eh-date">16 de Agos &nbsp;·&nbsp; 3 de Elul</p>
-          </div>
-        </Transition>
-
-        <!-- CARTA (detrás del sobre en z-index, cubierta por los pliegues) -->
-        <div
-          class="card-wrapper"
-          :class="{ rising: state === 'opening', risen: state === 'done' }"
-          @click="flipCard"
-        >
+      <Transition name="card-in">
+        <div v-if="visible" class="card-scene" @click="flipCard">
           <div class="card-flipper" :class="{ flipped }">
-            <!-- FRENTE -->
             <div class="card-face front">
               <img src="/carta-frente.jpeg" alt="Invitación frente" class="card-img" />
             </div>
-            <!-- DORSO -->
             <div class="card-face back">
               <img src="/carta-dorso.jpeg" alt="Invitación dorso" class="card-img" />
             </div>
           </div>
-          <div v-if="state === 'done' && !flipped" class="flip-hint">Tocá para girar</div>
-        </div>
-
-        <!-- SOBRE -->
-        <div
-          class="envelope"
-          :class="{ opened: state !== 'idle' }"
-          @click="startAnimation"
-        >
-          <div class="env-body">
-            <!-- líneas de costura de los pliegues -->
-            <svg class="env-seams" xmlns="http://www.w3.org/2000/svg">
-              <line x1="0"    y1="0"    x2="50%" y2="52%" class="seam-top"/>
-              <line x1="100%" y1="0"    x2="50%" y2="52%" class="seam-top"/>
-              <line x1="0"    y1="100%" x2="50%" y2="52%" class="seam-bot"/>
-              <line x1="100%" y1="100%" x2="50%" y2="52%" class="seam-bot"/>
-            </svg>
-            <div class="env-liner"></div>
-            <div class="env-fold-left"></div>
-            <div class="env-fold-right"></div>
-            <div class="env-fold-bottom"></div>
-          </div>
-          <div class="env-flap" :class="{ 'is-open': state !== 'idle' }"></div>
-          <!-- Nombres visibles cuando está cerrado -->
           <Transition name="fade">
-            <div v-if="state === 'idle'" class="env-names">
-              <span>FAMILIA NASATSKY</span>
-              <span>FAMILIA EBLAGON</span>
-            </div>
+            <p v-if="!flipped" class="flip-hint">Tocá para ver el dorso &nbsp;↺</p>
+            <p v-else class="flip-hint">Tocá para volver &nbsp;↩</p>
           </Transition>
         </div>
+      </Transition>
 
-        <!-- CTA abrir -->
-        <Transition name="fade">
-          <div v-if="state === 'idle'" class="cta" @click="startAnimation">
-            Tocá para abrir
-            <span class="cta-arrow">↓</span>
-          </div>
-        </Transition>
-
-      </div>
-      <!-- /scene -->
-
-      <!-- Ver la invitación -->
       <Transition name="fade">
         <button
-          v-if="state === 'done'"
-          class="mt-6 flex flex-col items-center gap-2 text-[#a95c2a] hover:text-[#7a3f1a] transition-colors"
+          v-if="showScroll"
+          class="scroll-btn"
           @click="scrollDown"
         >
-          <span class="text-[11px] tracking-[0.3em] uppercase">Mas informacion</span>
-          <svg class="w-5 h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <span>Más información</span>
+          <svg class="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
           </svg>
         </button>
@@ -125,151 +70,104 @@ function scrollDown() {
 
 <style scoped>
 
-/* ── VARIABLES ── */
-:root {
-  --env-blue: #f0ebe1;
-  --env-dark: #ddd5c4;
-  --env-lite: #f8f4ee;
-  --gold:     #c9a96e;
-  --text:     #5a3e2b;
-  --shadow:   rgba(80, 60, 40, 0.22);
-}
-
-/* ── SCENE ── */
-.scene {
-  position: relative;
-  width: 420px;
-  height: 500px;
+/* ── SECTION ── */
+.card-section {
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-/* ── ENVELOPE ── */
-.envelope {
-  position: absolute;
-  bottom: 0;
-  width: 380px;
-  height: 230px;
-  border-radius: 4px;
-  filter: drop-shadow(0 18px 40px var(--shadow));
-  cursor: pointer;
-  animation: env-appear 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
-}
-
-.env-body {
-  position: absolute;
-  inset: 0;
-  background: var(--env-blue);
-  border-radius: 4px;
+  flex-direction: column;
+  align-items: stretch;
   overflow: hidden;
 }
-.env-body::after {
-  content: '';
-  position: absolute; inset: 0;
-  box-shadow: inset 0 -10px 20px rgba(0,0,0,0.08), inset 0 10px 16px rgba(255,255,255,0.15);
-  pointer-events: none;
+
+/* ── ZONA NARANJA ── */
+.header-area {
+  background: #c9762e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1.5rem 2.5rem;
 }
 
-.env-seams {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 7;
-  pointer-events: none;
-}
-.seam-top {
-  stroke: rgba(0,0,0,0.08);
-  stroke-width: 0.8;
-}
-.seam-bot {
-  stroke: rgba(255,255,255,0.6);
-  stroke-width: 0.8;
+/* ── ZONA BEIGE ── */
+.card-area {
+  background: #ede8df;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 1.5rem 2.5rem;
 }
 
-.env-fold-left,
-.env-fold-right,
-.env-fold-bottom {
-  position: absolute; inset: 0; z-index: 6;
+/* ── HEADER ── */
+.header {
+  text-align: center;
+  user-select: none;
 }
-.env-fold-left   { background: var(--env-dark); clip-path: polygon(0 0, 50% 52%, 0 100%); }
-.env-fold-right  { background: var(--env-lite); clip-path: polygon(100% 0, 50% 52%, 100% 100%); }
-.env-fold-bottom { background: var(--env-blue); clip-path: polygon(0 100%, 100% 100%, 50% 52%); filter: brightness(0.92); }
-
-.env-liner {
-  position: absolute; inset: 0;
-  background: linear-gradient(170deg, #c8ba60 0%, #ede090 40%, #f5eea8 65%, #d4c468 100%);
-  clip-path: polygon(0 0, 100% 0, 50% 52%);
-  opacity: 0;
-  transition: opacity 0.5s ease 0.2s;
+.eh-top {
+  font-family: 'Atteron', serif;
+  font-size: 1rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #f5ede0;
+  margin: 0 0 0.3rem;
 }
-.opened .env-liner { opacity: 1; }
-
-.env-flap {
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, #f8f5ee 0%, #ede8de 100%);
-  clip-path: polygon(0 0, 100% 0, 50% 52%);
-  transform-origin: top center;
-  transform: perspective(1000px) rotateX(0deg);
-  filter: brightness(1.0);
-  z-index: 10;
+.eh-names {
+  font-family: 'SouthKorea', cursive;
+  font-size: 4.5rem;
+  font-weight: 400;
+  color: #f5ede0;
+  margin: 0 0 0.2rem;
+  line-height: 1.1;
 }
-.env-flap.is-open {
-  animation: flap-open 1.8s cubic-bezier(0.45, 0, 0.35, 1) forwards;
+.eh-amp {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 300;
+  font-style: italic;
 }
-
-.env-names {
-  position: absolute; inset: 0; z-index: 7;
-  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-  padding: 0 10% 20%;
-  gap: 3px;
-  font-family: 'Atteron', 'Playfair Display', serif;
-  font-size: 0.75rem; letter-spacing: .15em; color: #c9762e;
-  pointer-events: none;
+.eh-date {
+  font-family: 'Atteron', serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #f5ede0;
+  margin: 0;
 }
 
-/* ── CARD WRAPPER ── */
-.card-wrapper {
-  position: absolute;
-  width: 350px;
-  bottom: 30px;
-  left: 50%;
-  /* empieza centrada dentro del sobre, invisible */
-  transform: translateX(-50%) translateY(0px) scale(0.82);
-  opacity: 0;
-  z-index: 5;
-  pointer-events: none;
-  will-change: transform, opacity;
+/* ── CARD SCENE ── */
+.card-scene {
   perspective: 1200px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
 .card-flipper {
   position: relative;
-  width: 100%;
+  width: 320px;
   transform-style: preserve-3d;
-  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: default;
-}
-.card-wrapper.risen .card-flipper {
-  cursor: pointer;
+  transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 6px;
+  box-shadow:
+    0 2px 4px rgba(80,60,40,0.06),
+    0 8px 24px rgba(80,60,40,0.12),
+    0 24px 48px rgba(80,60,40,0.10);
 }
 .card-flipper.flipped {
   transform: rotateY(180deg);
 }
+.card-flipper:hover {
+  box-shadow:
+    0 4px 8px rgba(80,60,40,0.08),
+    0 16px 40px rgba(80,60,40,0.16),
+    0 32px 64px rgba(80,60,40,0.12);
+}
 
-/* ── CARD FACE ── */
 .card-face {
   width: 100%;
-  height: 100%;
-  background: #f5f0e8;
-  border: 1px solid #ddd4c0;
-  border-radius: 3px;
-  box-shadow: 0 8px 32px var(--shadow);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  border-radius: 6px;
   overflow: hidden;
-  position: relative;
 }
 .card-face.back {
   position: absolute;
@@ -281,135 +179,52 @@ function scrollDown() {
   display: block;
 }
 
-/* shine sweep */
-.card-face::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.55) 50%, transparent 75%);
-  transform: translateX(-150%);
-  pointer-events: none;
-  z-index: 2;
-}
-.card-wrapper.risen .card-face.front::after {
-  animation: shine 0.9s ease 0.2s forwards;
-}
-
-/* ── ESTADOS DE LA CARTA ── */
-.card-wrapper.rising {
-  animation: card-rise 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.05s forwards;
-}
-.card-wrapper.risen {
-  transform: translateX(-50%) translateY(-50px) scale(1.0);
-  opacity: 1;
-  pointer-events: auto;
-  z-index: 20;
-}
-
-/* ── FLIP HINT ── */
 .flip-hint {
-  position: absolute;
-  bottom: -28px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 8px;
-  letter-spacing: 0.3em;
-  color: var(--text);
-  opacity: 0.5;
-  white-space: nowrap;
-  text-transform: uppercase;
-  pointer-events: none;
-  animation: hint-pulse 2.5s ease-in-out 1s infinite;
-}
-
-/* ── CTA ── */
-.cta {
-  position: absolute;
-  bottom: -52px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 9px;
-  letter-spacing: 0.35em;
-  color: var(--text);
-  text-transform: uppercase;
-  cursor: pointer;
-  white-space: nowrap;
-  user-select: none;
-  text-align: center;
-}
-.cta-arrow {
-  display: block;
-  text-align: center;
-  margin-top: 6px;
-  font-size: 14px;
-  animation: bounce 1.4s ease-in-out infinite;
-}
-
-/* ── KEYFRAMES ── */
-@keyframes env-appear {
-  from { opacity: 0; transform: translateY(30px) scale(0.96); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@keyframes flap-open {
-  0%   { transform: perspective(1000px) rotateX(0deg); }
-  100% { transform: perspective(1000px) rotateX(-180deg); }
-}
-
-@keyframes card-rise {
-  0%   { transform: translateX(-50%) translateY(0px)    scale(0.82); opacity: 1; }
-  45%  { transform: translateX(-50%) translateY(-150px) scale(1.0);  opacity: 1; }
-  55%  { transform: translateX(-50%) translateY(-155px) scale(1.01); opacity: 1; }
-  100% { transform: translateX(-50%) translateY(-50px)  scale(1.0);  opacity: 1; }
-}
-
-@keyframes shine {
-  to { transform: translateX(150%); }
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(4px); }
-}
-
-@keyframes hint-pulse {
-  0%, 100% { opacity: 0.5; }
-  50%       { opacity: 0.2; }
-}
-
-/* ── HEADER ── */
-.envelope-header {
-  position: absolute;
-  top: 30px;
-  left: 0; right: 0;
-  text-align: center;
-  user-select: none;
-  z-index: 1;
-}
-.eh-top {
-  font-family: 'Atteron', 'Playfair Display', serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  color: #c9762e;
-  margin: 0 0 0.4rem;
-}
-.eh-names {
-  font-family: 'Atteron', 'Playfair Display', serif;
-  font-size: 2.4rem;
-  font-weight: 400;
-  color: #c9762e;
-  margin: 0 0 0.4rem;
-  letter-spacing: 0.04em;
-  line-height: 1.1;
-}
-.eh-date {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   letter-spacing: 0.2em;
-  color: #c9762e;
-  margin: 0;
+  text-transform: uppercase;
+  color: #a08060;
+  opacity: 0.7;
+  user-select: none;
 }
+
+/* ── SCROLL ── */
+.scroll-btn {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #a95c2a;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.scroll-btn:hover { color: #7a3f1a; }
 
 /* ── TRANSITIONS ── */
-.fade-enter-active, .fade-leave-active { transition: opacity .4s ease; }
+.slide-down-enter-active {
+  transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.slide-down-enter-from {
+  opacity: 0;
+  transform: translateY(-24px);
+}
+
+.card-in-enter-active {
+  transition: all 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+}
+.card-in-enter-from {
+  opacity: 0;
+  transform: translateY(40px) rotateX(12deg) scale(0.94);
+}
+
+.fade-enter-active, .fade-leave-active { transition: opacity 0.4s ease; }
 .fade-enter-from,  .fade-leave-to      { opacity: 0; }
 </style>

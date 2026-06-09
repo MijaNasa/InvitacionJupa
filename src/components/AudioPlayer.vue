@@ -6,6 +6,17 @@ const audio = ref(null)
 
 onMounted(() => {
   audio.value.volume = 0.7
+
+  // Intenta autoplay; si el browser lo bloquea (iOS), reintenta en el primer gesto
+  audio.value.play().catch(() => {
+    const retry = () => {
+      if (props.isPlaying) audio.value.play().catch(() => {})
+      document.removeEventListener('click', retry)
+      document.removeEventListener('touchstart', retry)
+    }
+    document.addEventListener('click', retry)
+    document.addEventListener('touchstart', retry, { passive: true })
+  })
 })
 
 watch(() => props.isPlaying, (playing) => {

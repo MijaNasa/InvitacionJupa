@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import EnvelopeSection from './components/EnvelopeSection.vue';
 import MainSection from './components/MainSection.vue';
 import AudioPlayer from './components/AudioPlayer.vue';
@@ -10,18 +10,6 @@ const toggleMusic = () => {
   isMusicPlaying.value = !isMusicPlaying.value;
 };
 
-// Los navegadores bloquean autoplay sin interacción previa.
-// En el primer click/touch recreamos el iframe para que el autoplay funcione.
-onMounted(() => {
-  const startOnInteraction = () => {
-    isMusicPlaying.value = false;
-    setTimeout(() => { isMusicPlaying.value = true; }, 50);
-    document.removeEventListener('click', startOnInteraction);
-    document.removeEventListener('touchstart', startOnInteraction);
-  };
-  document.addEventListener('click', startOnInteraction);
-  document.addEventListener('touchstart', startOnInteraction);
-});
 </script>
 
 <template>
