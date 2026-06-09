@@ -99,7 +99,7 @@ function enter() {
   letter-spacing: 0.35em;
   text-transform: uppercase;
   color: #f5ede0;
-  margin: 0 0 1.5rem;
+  margin: 0 0 2.5rem;
   opacity: 0.75;
 }
 .sp-names {
@@ -121,7 +121,7 @@ function enter() {
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: #f5ede0;
-  margin: 2rem 0 4rem;
+  margin: 3rem 0 5rem;
   opacity: 0.75;
 }
 .sp-tap {
