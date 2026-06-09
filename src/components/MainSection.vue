@@ -50,6 +50,7 @@ onUnmounted(() => clearInterval(timer))
         <span class="dot">·</span>
         <span>Jupá <strong>17:00 hs</strong></span>
       </p>
+      <p class="fiesta-label">¡y luego a festejar juntos!</p>
     </div>
 
     <!-- Cards -->
@@ -236,6 +237,14 @@ onUnmounted(() => clearInterval(timer))
 }
 .times strong { color: #3d2b1a; font-weight: 600; }
 .dot { color: #c9a96e; }
+
+.fiesta-label {
+  font-family: 'Atteron', 'Playfair Display', serif;
+  font-size: 1rem;
+  color: #c9a96e;
+  margin-top: 0.6rem;
+  letter-spacing: 0.04em;
+}
 
 /* ── CARDS ── */
 .cards {
