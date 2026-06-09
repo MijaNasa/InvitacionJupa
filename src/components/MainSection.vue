@@ -46,7 +46,7 @@
           La Calera Córdoba
         </p>
         <a
-          href="https://maps.google.com/?q=Av.+Ejército+Argentino+47,+La+Calera,+Córdoba"
+          href="https://maps.app.goo.gl/amPtS31tGbpbLRVV9?g_st=iw"
           target="_blank"
           rel="noopener"
           class="card-link"
@@ -73,11 +73,15 @@
 
     <!-- Footer -->
     <div class="block footer-msg">
-      <img src="/fotoCamiYMija.jpg" alt="Cami y Mija" class="couple-photo" />
+      <img src="/fotoCamiYMija2.png" alt="Cami y Mija" class="couple-photo" />
+      <div class="gift-block">
+        <p class="gift-msg">Para quienes deseen hacernos un regalo <br>compartimos nuestro alias :</p>
+        <p class="alias">jupa.camiymija</p>
+      </div>
       <div class="gold-rule"></div>
 
       <p class="families">Familia Nasatsky · Familia Eblagon</p>
-      <p class="alias">Alias: XXXXX</p>
+      
     </div>
 
   </section>
@@ -203,7 +207,7 @@
   letter-spacing: 0.03em;
 }
 .card-body {
-  font-size: 0.72rem;
+  font-size: 0.62rem;
   line-height: 1.7;
   color: #7a5c42;
   margin: 0;
@@ -212,7 +216,7 @@
   font-size: 0.72rem;
   line-height: 1.7;
   color: #7a5c42;
-  margin-top: 35px;
+  margin-top: 10px;
 }
 .card-body strong { color: #3d2b1a; }
 .card-body em { font-style: normal; color: #c9a96e; }
@@ -288,11 +292,32 @@
   margin-bottom: 0.4rem;
 }
 
+.gift-block {
+  margin: 0 auto 1rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid #e2d5c0;
+  border-radius: 6px;
+  background: #fdfaf6;
+  max-width: 280px;
+  box-shadow: 0 2px 10px rgba(80, 60, 40, 0.06);
+}
+
+.gift-msg {
+  font-family: 'Atteron', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: #7a5c42;
+  line-height: 1.7;
+  margin: 0 0 0.6rem;
+}
+
 .alias {
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  color: #a08060;
-  margin-top: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #c9a96e;
+  margin: 0;
 }
 
 </style>
