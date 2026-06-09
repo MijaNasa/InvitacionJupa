@@ -135,12 +135,12 @@ onUnmounted(() => clearInterval(timer))
         </button>
         <Transition name="slide">
           <div v-if="showBankDetails" class="bank-details">
-            <div class="bank-row"><span class="bank-label">Nombre</span><span class="bank-val">Camila Lopez Eblagon</span></div>
-            <div class="bank-row"><span class="bank-label">Banco</span><span class="bank-val">Brubank</span></div>
-            <div class="bank-row"><span class="bank-label">CBU</span><span class="bank-val">1430001713048737300019</span></div>
-            <div class="bank-row"><span class="bank-label">Alias</span><span class="bank-val">jupa.camiymija</span></div>
-            <div class="bank-row"><span class="bank-label">Nº cuenta</span><span class="bank-val">1304873730001</span></div>
-            <div class="bank-row"><span class="bank-label">CUIT</span><span class="bank-val">27-45242602-7</span></div>
+            <div class="bank-row"><span class="bank-label">Nombre</span><span class="bank-val">Mijael Ariel Nasatsky</span></div>
+            <div class="bank-row"><span class="bank-label">Banco</span><span class="bank-val">Banco Macro SA</span></div>
+            <div class="bank-row"><span class="bank-label">CBU</span><span class="bank-val">2850332340095328840258</span></div>
+            <div class="bank-row"><span class="bank-label">Alias</span><span class="bank-val">MijaNasa</span></div>
+            <div class="bank-row"><span class="bank-label">Nº cuenta</span><span class="bank-val">CA ARS 433209532884025</span></div>
+            <div class="bank-row"><span class="bank-label">CUIT</span><span class="bank-val">20-43005865-8</span></div>
           </div>
         </Transition>
       </div>
