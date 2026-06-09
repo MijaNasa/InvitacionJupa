@@ -94,7 +94,7 @@ function enter() {
   width: 100%;
 }
 .sp-top {
-  font-family: 'Atteron', serif;
+  font-family: 'Atteron', 'Montserrat', sans-serif;
   font-size: 1.4rem;
   letter-spacing: 0.35em;
   text-transform: uppercase;
@@ -104,7 +104,7 @@ function enter() {
 }
 .sp-names {
   font-family: 'SouthKorea', cursive;
-  font-size: clamp(5.5rem, 22vw, 9rem);
+  font-size: clamp(4rem, 16vw, 9rem);
   font-weight: 400;
   color: #f5ede0;
   margin: 0;
@@ -116,7 +116,7 @@ function enter() {
   font-style: italic;
 }
 .sp-date {
-  font-family: 'Atteron', serif;
+  font-family: 'Atteron', 'Montserrat', sans-serif;
   font-size: 1.1rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
