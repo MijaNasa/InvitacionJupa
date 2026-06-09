@@ -34,10 +34,17 @@ function scrollDown() {
 
     <div class="relative z-10 flex flex-col items-center w-full">
 
-      <p class="font-display text-[10px] tracking-[0.35em] text-[#8b7355] uppercase mb-6">בעזרת ה׳</p>
-
       <!-- ESCENA -->
       <div class="scene">
+
+        <!-- HEADER sobre cerrado — absoluto dentro de la escena -->
+        <Transition name="fade">
+          <div v-if="state === 'idle'" class="envelope-header">
+            <p class="eh-top">¡Nos casamos!</p>
+            <h1 class="eh-names">Mija &nbsp;·&nbsp; Cami</h1>
+            <p class="eh-date">16 de Agos &nbsp;·&nbsp; 3 de Elul</p>
+          </div>
+        </Transition>
 
         <!-- CARTA (detrás del sobre en z-index, cubierta por los pliegues) -->
         <div
@@ -214,10 +221,11 @@ function scrollDown() {
 
 .env-names {
   position: absolute; inset: 0; z-index: 7;
-  display: flex; align-items: flex-end; justify-content: space-between;
-  padding: 0 10% 18%;
-  font-family: 'Playfair Display', serif;
-  font-size: 0.55rem; letter-spacing: .13em; color: #c9762e;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  padding: 0 10% 20%;
+  gap: 3px;
+  font-family: 'Atteron', 'Playfair Display', serif;
+  font-size: 0.75rem; letter-spacing: .15em; color: #c9762e;
   pointer-events: none;
 }
 
@@ -291,7 +299,7 @@ function scrollDown() {
   animation: card-rise 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2.05s forwards;
 }
 .card-wrapper.risen {
-  transform: translateX(-50%) translateY(-60px) scale(1.0);
+  transform: translateX(-50%) translateY(-50px) scale(1.0);
   opacity: 1;
   pointer-events: auto;
   z-index: 20;
@@ -349,9 +357,9 @@ function scrollDown() {
 
 @keyframes card-rise {
   0%   { transform: translateX(-50%) translateY(0px)    scale(0.82); opacity: 1; }
-  45%  { transform: translateX(-50%) translateY(-220px) scale(1.0);  opacity: 1; }
-  55%  { transform: translateX(-50%) translateY(-230px) scale(1.01); opacity: 1; }
-  100% { transform: translateX(-50%) translateY(-60px)  scale(1.0);  opacity: 1; }
+  45%  { transform: translateX(-50%) translateY(-150px) scale(1.0);  opacity: 1; }
+  55%  { transform: translateX(-50%) translateY(-155px) scale(1.01); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(-50px)  scale(1.0);  opacity: 1; }
 }
 
 @keyframes shine {
@@ -366,6 +374,39 @@ function scrollDown() {
 @keyframes hint-pulse {
   0%, 100% { opacity: 0.5; }
   50%       { opacity: 0.2; }
+}
+
+/* ── HEADER ── */
+.envelope-header {
+  position: absolute;
+  top: 30px;
+  left: 0; right: 0;
+  text-align: center;
+  user-select: none;
+  z-index: 1;
+}
+.eh-top {
+  font-family: 'Atteron', 'Playfair Display', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: #c9762e;
+  margin: 0 0 0.4rem;
+}
+.eh-names {
+  font-family: 'Atteron', 'Playfair Display', serif;
+  font-size: 2.4rem;
+  font-weight: 400;
+  color: #c9762e;
+  margin: 0 0 0.4rem;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+.eh-date {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: #c9762e;
+  margin: 0;
 }
 
 /* ── TRANSITIONS ── */
