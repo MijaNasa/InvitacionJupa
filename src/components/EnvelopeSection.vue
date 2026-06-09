@@ -1,8 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
-const flipped   = ref(false)
-const visible   = ref(false)
+const flipped    = ref(false)
+const visible    = ref(false)
 const showScroll = ref(false)
 
 onMounted(() => {
@@ -20,51 +20,36 @@ function scrollDown() {
 <template>
   <section class="card-section">
 
-    <!-- ZONA NARANJA: header -->
-    <div class="header-area">
-      <Transition name="slide-down">
-        <div v-if="visible" class="header">
-          <p class="eh-top">¡Nos casamos!</p>
-          <h1 class="eh-names">Mija <span class="eh-amp">&amp;</span> Cami</h1>
-          <p class="eh-date">16 de Agosto &nbsp;·&nbsp; 3 de Elul</p>
-        </div>
-      </Transition>
-    </div>
-
-    <!-- ZONA BEIGE: carta + scroll -->
-    <div class="card-area">
-
-      <Transition name="card-in">
-        <div v-if="visible" class="card-scene" @click="flipCard">
-          <div class="card-flipper" :class="{ flipped }">
-            <div class="card-face front">
-              <img src="/carta-frente.jpeg" alt="Invitación frente" class="card-img" />
-            </div>
-            <div class="card-face back">
-              <img src="/carta-dorso.jpeg" alt="Invitación dorso" class="card-img" />
-            </div>
+    <Transition name="card-in">
+      <div v-if="visible" class="card-scene" @click="flipCard">
+        <div class="card-flipper" :class="{ flipped }">
+          <div class="card-face front">
+            <img src="/carta-frente.jpeg" alt="Invitación frente" class="card-img" />
           </div>
-          <Transition name="fade">
-            <p v-if="!flipped" class="flip-hint">Tocá para ver el dorso &nbsp;↺</p>
-            <p v-else class="flip-hint">Tocá para volver &nbsp;↩</p>
-          </Transition>
+          <div class="card-face back">
+            <img src="/carta-dorso.jpeg" alt="Invitación dorso" class="card-img" />
+          </div>
         </div>
-      </Transition>
+        <Transition name="fade">
+          <p v-if="!flipped" class="flip-hint">Tocá para ver el dorso &nbsp;↺</p>
+          <p v-else class="flip-hint">Tocá para volver &nbsp;↩</p>
+        </Transition>
+      </div>
+    </Transition>
 
-      <Transition name="fade">
-        <button
-          v-if="showScroll"
-          class="scroll-btn"
-          @click="scrollDown"
-        >
-          <span>Más información</span>
-          <svg class="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-          </svg>
-        </button>
-      </Transition>
+    <Transition name="fade">
+      <button
+        v-if="showScroll"
+        class="scroll-btn"
+        @click="scrollDown"
+      >
+        <span>Más información</span>
+        <svg class="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+    </Transition>
 
-    </div>
   </section>
 </template>
 
@@ -72,63 +57,15 @@ function scrollDown() {
 
 /* ── SECTION ── */
 .card-section {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  overflow: hidden;
-}
-
-/* ── ZONA NARANJA ── */
-.header-area {
-  background: #c9762e;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 3rem 1.5rem 2.5rem;
-}
-
-/* ── ZONA BEIGE ── */
-.card-area {
   background: #ede8df;
+  min-height: 100vh;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2.5rem 1.5rem 2.5rem;
-}
-
-/* ── HEADER ── */
-.header {
-  text-align: center;
-  user-select: none;
-}
-.eh-top {
-  font-family: 'Atteron', serif;
-  font-size: 1rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: #f5ede0;
-  margin: 0 0 0.3rem;
-}
-.eh-names {
-  font-family: 'SouthKorea', cursive;
-  font-size: 4.5rem;
-  font-weight: 400;
-  color: #f5ede0;
-  margin: 0 0 0.2rem;
-  line-height: 1.1;
-}
-.eh-amp {
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 300;
-  font-style: italic;
-}
-.eh-date {
-  font-family: 'Atteron', serif;
-  font-size: 0.9rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #f5ede0;
-  margin: 0;
+  justify-content: center;
+  padding: 3rem 1.5rem 5rem;
+  overflow: hidden;
 }
 
 /* ── CARD SCENE ── */
@@ -191,7 +128,10 @@ function scrollDown() {
 
 /* ── SCROLL ── */
 .scroll-btn {
-  margin-top: 1.5rem;
+  position: absolute;
+  bottom: 1.75rem;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -204,19 +144,12 @@ function scrollDown() {
   background: none;
   border: none;
   cursor: pointer;
+  white-space: nowrap;
   transition: color 0.2s;
 }
 .scroll-btn:hover { color: #7a3f1a; }
 
 /* ── TRANSITIONS ── */
-.slide-down-enter-active {
-  transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.slide-down-enter-from {
-  opacity: 0;
-  transform: translateY(-24px);
-}
-
 .card-in-enter-active {
   transition: all 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
 }
